@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/beans/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+					    
+    <!-- Configure Data Source -->
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- Database Driver-->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!-- URL to connect database-->
+        <property name="url" value="jdbc:mysql://localhost:3306/db_spring?characterEncoding=latin1" />
+        <!-- Username when connecting-->
+        <property name="username" value="root"/>
+        <!-- Passoword when connecting-->
+        <property name="password" value="123456"/>
+    </bean>
+    <!-- JDBC Template-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <!-- must use data source default-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- Inject jdbcTemplate into userDaoImple -->
+    <bean id="userDao" class="com.ssm.jdbc.UserDaoImpl">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!-- Transaction Manager, set date source-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- Transaction Annotation Driver-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+</beans>
