@@ -128,12 +128,6 @@ public class MyBatisTest {
 		// 3. Create SqlSession instance
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
-		User user = new User();
-		user.setId(4);
-		user.setUsername("tom");
-		user.setJobs("manager");
-		user.setPhone("13624589654");
-		
 		// 4.Execute defined SQL in mapping file
 		int rows = sqlSession.delete("com.ssm.mapper.UserMapper.deleteUser", 4);
 		
