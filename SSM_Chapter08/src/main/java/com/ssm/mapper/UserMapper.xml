@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.mapper.UserMapper">
+    <!-- <if> element-->
+    <select id="findUserByNameAndJobs" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+        select * from t_user
+        <where>
+            <if test="username !=null and username !=''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="jobs != null and jobs !=''">
+                and jobs=#{jobs}
+            </if>
+        </where>
+    </select>
+    <!-- <choose> (<when>,<otherwise>)-->
+    <select id="findUserByNameOrJobs" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+        select * from t_user where 1=1
+        <choose>
+            <when test="username != null and username !=''">
+                and username like concat('%',#{username},'%')
+            </when>
+            <when test="jobs != null and jobs !=''">
+                and jobs=#{jobs}
+            </when>
+            <otherwise>
+                and phone is not null
+            </otherwise>
+        </choose>
+    </select>
+    <update id="updateUserBySet" parameterType="com.ssm.po.User">
+        update t_user
+        <set>
+            <if test="username !=null and username !=''">
+                username=#{username},
+            </if>
+            <if test="jobs != null and jobs !=''">
+                jobs=#{jobs},
+            </if>
+            <if test="phone != null and phone !=''">
+                phone=#{phone},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

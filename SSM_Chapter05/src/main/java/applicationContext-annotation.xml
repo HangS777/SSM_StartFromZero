@@ -16,7 +16,7 @@
         <!-- Database Driver-->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!-- URL to connect database-->
-        <property name="url" value="jdbc:mysql://localhost:3306/db_spring?characterEncoding=latin1" />
+        <property name="url" value="jdbc:mysql://localhost:3306/db_spring?characterEncoding=utf-8" />
         <!-- Username when connecting-->
         <property name="username" value="root"/>
         <!-- Passoword when connecting-->

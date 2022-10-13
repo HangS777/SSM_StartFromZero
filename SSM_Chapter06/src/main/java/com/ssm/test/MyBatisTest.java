@@ -97,7 +97,7 @@ public class MyBatisTest {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		
 		User user = new User();
-		user.setId(4);
+		user.setId(5);
 		user.setUsername("tom");
 		user.setJobs("manager");
 		user.setPhone("13624589654");
