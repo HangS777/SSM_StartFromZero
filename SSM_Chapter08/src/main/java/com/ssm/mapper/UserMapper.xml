@@ -44,4 +44,17 @@
         </set>
         where id=#{id}
     </update>
+    <!-- <foreach> element -->
+    <select id="findUserByIds" parameterType="List" resultType="com.ssm.po.User">
+        select * from t_user where id in
+        <foreach item="id" index="index" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <!-- <bind> element -->
+    <select id="findUserByName2" parameterType="com.ssm.po.User" resultType="com.ssm.po.User">
+        <!-- _parameter.getUsername() also can be written as field name, e.g., username-->
+        <bind name="p_username" value="'%'+_parameter.getUsername()+'%'"/>
+        select * from t_user where username like #{p_username}
+    </select>
 </mapper>
