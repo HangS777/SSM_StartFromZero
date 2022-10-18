@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- specify a package where MyBatis will search for beans -->
+    <!-- Each bean found in com.ssm.po , if no annotation is found, will be registered as an alias using uncapitalized non-qualified class name of the bean. That is com.ssm.po.User will be registered as user -->
+    <typeAliases>
+        <package name="com.ssm.po"/>
+    </typeAliases>
+
+    <!-- Set up Mapper, can be instead using mapper interface auto-scanning-->
+<!--     <mappers>
+        <mapper resource="com/ssm/mapper/UserMapper.xml" />
+    </mappers> -->
+</configuration>
