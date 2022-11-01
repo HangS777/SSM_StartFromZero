@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+					    
+    <!-- read db.properties -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- Configure Data Source -->
+    <bean id="dataSource"
+        class="org.apache.commons.dbcp2.BasicDataSource">
+        <!-- Database Driver-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <!-- URL to connect database-->
+        <property name="url" value="${jdbc.url}" />
+        <!-- Username when connecting-->
+        <property name="username" value="${jdbc.username}"/>
+        <!-- Passoword when connecting-->
+        <property name="password" value="${jdbc.password}"/>
+        <!-- Max connection number -->
+        <property name="maxTotal" value="${jdbc.maxTotal}"/>
+        <!-- Max idle connection number -->
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <!-- Max initial connection number -->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+    </bean>
+    <!-- Transaction Manager, set date source-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- Advice -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 传播行为 -->
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>    
+    </tx:advice>
+    <!-- Aspect -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.ssm.service.*.*(..))" />
+    </aop:config>
+    <!-- Set up MyBatis Factory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+    </bean>
+    <!-- Mapper Interface Auto-Scanning, scanning Dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ssm.dao"></property>
+    </bean> 
+    <!-- scanninng Service -->
+    <context:component-scan base-package="com.ssm.service" />
+</beans>
