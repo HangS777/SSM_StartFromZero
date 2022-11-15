@@ -14,10 +14,10 @@ request.setCharacterEncoding("UTF-8");
  </head>
 <body>
 	<div class="place">
-    <span>位置：</span>
+    <span>Location：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">用户列表</a></li>
+    <li><a href="#">Main Page</a></li>
+    <li><a href="#">UserList</a></li>
     </ul>
     </div>    
     <div class="rightinfo">    
@@ -29,30 +29,30 @@ request.setCharacterEncoding("UTF-8");
        <form action="${pageContext.request.contextPath}/findUserList.action" id="userListForm"
 			name="ff" method="post">
 			<ul class="seachform">
-				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;搜索关键词:</label>
-				<input name="keywords" value="${keywords}" placeholder="这里输入姓名或登录账号" type="text" style="width: 400px;" class="scinput" /></li>
-				<li><label style="width: 60px;">角色：</label> <select
+				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;Search Keywords:</label>
+				<input name="keywords" value="${keywords}" placeholder="Input name or login account" type="text" style="width: 400px;" class="scinput" /></li>
+				<li><label style="width: 60px;">Role：</label> <select
 					name="userListRoleId" id="userListRoleId" class="dfinput">
-						<option value="">--请选择--</option>
+						<option value="">--Select--</option>
 						<c:forEach items="${roleList}" var="r">
 							<option value="${r.roleId}" <c:if test="${r.roleId eq userListRoleId }">selected="selected"</c:if>>&nbsp;&nbsp;&nbsp;&nbsp;${r.roleName }</option>
 						</c:forEach>
 				</select></li>
 				<li><label>&nbsp;</label><input name="" type="submit"
-					class="scbtn" value="查询" /></li>
+					class="scbtn" value="Search" /></li>
 			</ul>
 		</form>
        
    		 <table class="tablelist" >
 	    	<thead>
 	    	<tr>
-	        <th style="width:100px;text-align:center;">用户姓名</th>
-	        <th style="width:100px;text-align:center;">登录账号</th>
-	        <th style="width:100px;text-align:center;">联系电话</th>
-	        <th style="width:100px;text-align:center;">注册/修改时间</th>
-	        <th style="width:120px;text-align:center;">用户角色</th>
-	        <th style="width:120px;text-align:center;">审核状态</th>
-	        <th style="width:200px;text-align:center;">操作</th>
+	        <th style="width:100px;text-align:center;">Username</th>
+	        <th style="width:100px;text-align:center;">Login Account</th>
+	        <th style="width:100px;text-align:center;">Phone Number</th>
+	        <th style="width:100px;text-align:center;">Register Time</th>
+	        <th style="width:120px;text-align:center;">User status</th>
+	        <th style="width:120px;text-align:center;">Approval Status</th>
+	        <th style="width:200px;text-align:center;">Operate</th>
 	        </tr>
 	        </thead>
 				<tbody>
@@ -66,22 +66,22 @@ request.setCharacterEncoding("UTF-8");
 							<td align="center">${user.roleName}</td>
 							<td align="center">
 							<c:if test="${user.status=='2'}" var="flag">
-								已启用
+								Activated
 			                </c:if> 
 			                <c:if test="${not flag}">
-			                	未启用或被禁用
+			                	Not activated or Disabled
 			                </c:if>
 							</td>
 						    <td align="center">
-								<a href="${pageContext.request.contextPath}/toEditUser.action?userId=${user.userId}">修改</a>
+								<a href="${pageContext.request.contextPath}/toEditUser.action?userId=${user.userId}">Edit</a>
 								<c:if test="${user.loginName!='admin'}">
 								<c:if test="${user.status=='2'}" var="status_flag">
-									&nbsp;|&nbsp;<a href='#' onclick="disableUser(${user.userId})">禁用</a>
+									&nbsp;|&nbsp;<a href='#' onclick="disableUser(${user.userId})">Disable</a>
 			                    </c:if> 
 			                    <c:if test="${not status_flag}">
-			                    	&nbsp;|&nbsp;<a href='#' onclick="enableUser(${user.userId})">启用</a> 
+			                    	&nbsp;|&nbsp;<a href='#' onclick="enableUser(${user.userId})">Activate</a> 
 			                    </c:if>
-								&nbsp;|&nbsp;<a href='#' onclick="del(${user.userId})">删除</a>
+								&nbsp;|&nbsp;<a href='#' onclick="del(${user.userId})">Delete</a>
 								</c:if>
 								</td>
 						</tr>	
@@ -91,7 +91,7 @@ request.setCharacterEncoding("UTF-8");
 				<div>
 					<tr>
 					<td colspan="7" align="center">
-					暂无用户
+					No user yet
 					</td>
 					</tr>  
 				</div>
@@ -103,20 +103,16 @@ request.setCharacterEncoding("UTF-8");
 			$.ajax({
 				url:"${pageContext.request.contextPath }/disableUser.action",
 				type:"post",
-				//data表示发送的数据
 				data:JSON.stringify({userId:userId,status:3}),
-				// 定义发送请求的数据格式为JSON字符串
 				contentType:"application/json;charset=UTF-8",
-				//定义回调响应的数据格式为JSON字符串，该属性可以省略
 				dataType:"json",
-				//成功响应的结果
 				success:function(data){
 					if(data!=null){
 						if(data.userId>0){
-							alert("禁用成功！");
+							alert("Disable Success！");
 							window.location.reload();							
 						}else{
-							alert("禁用失败！");
+							alert("Disable Failed！");
 							window.location.reload();
 						}
 					}
@@ -127,20 +123,16 @@ request.setCharacterEncoding("UTF-8");
 			$.ajax({
 				url:"${pageContext.request.contextPath }/enableUser.action",
 				type:"post",
-				//data表示发送的数据
 				data:JSON.stringify({userId:userId,status:2}),
-				// 定义发送请求的数据格式为JSON字符串
 				contentType:"application/json;charset=UTF-8",
-				//定义回调响应的数据格式为JSON字符串，该属性可以省略
 				dataType:"json",
-				//成功响应的结果
 				success:function(data){
 					if(data!=null){
 						if(data.userId>0){
-							alert("启用成功！");
+							alert("Activiate Success！");
 							window.location.reload();							
 						}else{
-							alert("启用失败！");
+							alert("Activiate Failed！");
 							window.location.reload();
 						}
 					}
@@ -148,25 +140,21 @@ request.setCharacterEncoding("UTF-8");
 	  		});
 		}
 		function del(userId){
-			if(window.confirm("您确定要删除吗？"))
+			if(window.confirm("Are your sure to delete？"))
 			{
 				$.ajax({
 					url:"${pageContext.request.contextPath }/delUser.action",
 					type:"post",
-					//data表示发送的数据
 					data:JSON.stringify({userId:userId}),
-					// 定义发送请求的数据格式为JSON字符串
 					contentType:"application/json;charset=UTF-8",
-					//定义回调响应的数据格式为JSON字符串，该属性可以省略
 					dataType:"json",
-					//成功响应的结果
 					success:function(data){
 						if(data!=null){
 							if(data.userId>0){
-								alert("删除成功！");
+								alert("Delete Success！");
 								window.location.reload();							
 							}else{
-								alert("删除失败！");
+								alert("Delete Failed！");
 								window.location.reload();
 							}
 						}

@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <!-- Configure the package which scanner should to scan -->
-    <context:component-scan base-package="com.ssm.controller" />
+    <context:component-scan base-package="com.ssm.web.controller" />
     <!-- Configure Annotation Driver -->
     <mvc:annotation-driven />
     <!-- Configure static resources access mapping, all of these files will not be intercepted by frontend dispatcher servlet -->
@@ -28,14 +28,15 @@
     	<property name="suffix" value=".jsp" />
     </bean>
     <!-- Configure Login Interceptor -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**" />
-            <mvc:exclude-mapping path="/index.action"/>
-            <mvc:exclude-mapping path="/findNewsByCategoryIdPage.action"/>
-            <mvc:exclude-mapping path="/findFrontNewsByNewsId.action"/>
-            <bean class="com.ssm.interceptor.LoginInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
+    
+<!--     <mvc:interceptors> -->
+<!--         <mvc:interceptor> -->
+<!--             <mvc:mapping path="/**" /> -->
+<!--             <mvc:exclude-mapping path="/index.action"/> -->
+<!--             <mvc:exclude-mapping path="/findNewsByCategoryIdPage.action"/> -->
+<!--             <mvc:exclude-mapping path="/findFrontNewsByNewsId.action"/> -->
+<!--             <bean class="com.ssm.interceptor.LoginInterceptor" /> -->
+<!--         </mvc:interceptor> -->
+<!--     </mvc:interceptors> -->
 
 </beans>

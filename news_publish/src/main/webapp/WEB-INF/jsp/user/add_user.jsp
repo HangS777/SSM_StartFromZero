@@ -7,35 +7,35 @@ request.setCharacterEncoding("UTF-8");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加用户</title>
+<title>Add User</title>
 		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="place">
-    <span>位置：</span>
+    <span>Setting: </span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="${pageContext.request.contextPath}/findUserList.action">用户列表</a></li>
+    <li><a href="#">Main Page</a></li>
+    <li><a href="${pageContext.request.contextPath}/findUserList.action">User</a></li>
     </ul>
     </div>    
     <div class="formbody">    
-    <div class="formtitle"><span>添加用户</span></div>
+    <div class="formtitle"><span>Add User</span></div>
 	   <form action="${pageContext.request.contextPath}/addUser.action" name="ff" method="post" onsubmit="return checkValue()"> 
 	   <ul class="forminfo">
-    <li><label style="width:150px;">登录账号（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="loginName" name="loginName" value="${user.loginName}" type="text" class="dfinput" /><i>&nbsp;<font style="color:Red;">${checkUserLoginNameMsg}</font></i></li>
-    <li><label style="width:150px;">密码（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="password" name="password" type="password" class="dfinput" /><i></i></li>
-	<li><label style="width:150px;">用户姓名（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="userName" name="userName"  value="${user.userName}" type="text" class="dfinput" /><i></i></li>
-	<li><label style="width:150px;">电话号码：</label><input id="tel" name="tel"  value="${user.tel}" type="text" class="dfinput" /><i></i></li>
-    <li><label style="width:150px;">用户角色（<font style="color:Red;font-weight:bolder;">*</font>）：</label>
+    <li><label style="width:150px;">LoginAccount（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="loginName" name="loginName" value="${user.loginName}" type="text" class="dfinput" /><i>&nbsp;<font style="color:Red;">${checkUserLoginNameMsg}</font></i></li>
+    <li><label style="width:150px;">Password（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="password" name="password" type="password" class="dfinput" /><i></i></li>
+	<li><label style="width:150px;">UserName（<font style="color:Red;font-weight:bolder;">*</font>）：</label><input id="userName" name="userName"  value="${user.userName}" type="text" class="dfinput" /><i></i></li>
+	<li><label style="width:150px;">PhoneNumber：</label><input id="tel" name="tel"  value="${user.tel}" type="text" class="dfinput" /><i></i></li>
+    <li><label style="width:150px;">UserRole（<font style="color:Red;font-weight:bolder;">*</font>）：</label>
 	<select name="roleId" id="roleId"  class="dfinput">
-						<option value="">--请选择--</option>
+						<option value="">--Select--</option>
 						<c:forEach items="${roleList}" var="r">
 							<option value="${r.roleId}" <c:if test="${r.roleId eq user.roleId }">selected="selected"</c:if>>${r.roleName }</option>
 						</c:forEach>
 				</select>	
 	<i></i></li>
-    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认添加"/>
-    &nbsp;&nbsp;<input name="" type="button" onclick="goback();"class="btn" value="返回列表"/></li>
+    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="Confirm Add"/>
+    &nbsp;&nbsp;<input name="" type="button" onclick="goback();"class="btn" value="Return List"/></li>
     </ul>
     </form>  
     </div>
@@ -46,30 +46,30 @@ request.setCharacterEncoding("UTF-8");
     function checkValue() {		
 		var str = document.getElementById("loginName").value;
 		if (str.length < 1) {
-			alert("请输入登录账号");
+			alert("Please input your login name");
 			document.getElementById("loginName").focus();
 			return false;
 		}
 		str = document.getElementById("password").value;
 		if (str.length < 1) {
-			alert("请输入密码");
+			alert("Please input your password");
 			document.getElementById("password").focus();
 			return false;
 		}
 		if (str.length > 0 && str.length<6) {
-			alert("密码长度应大于等于6");
+			alert("Password length should greater than 6");
 			document.getElementById("password").focus();
 			return false;
 		}
 		str = document.getElementById("userName").value;
 		if (str.length < 1) {
-			alert("请输入用户姓名");
+			alert("Please input username");
 			document.getElementById("userName").focus();
 			return false;
 		}
 		str = document.getElementById("roleId").value;
 		if (str == '') {
-			alert("请选择用户角色");
+			alert("Plase select role");
 			return false;
 		}
 		return true;

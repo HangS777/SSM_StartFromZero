@@ -8,7 +8,7 @@
 <script language="JavaScript" src="js/jquery.js"></script>
 <script type="text/javascript">
 $(function(){	
-	//顶部导航切换
+	//Top Navigation Switch
 	$(".nav li a").click(function(){
 		$(".nav li a.selected").removeClass("selected")
 		$(this).addClass("selected");
@@ -18,15 +18,15 @@ $(function(){
 </head>
 <body style="background:url(images/topbg.gif) repeat-x;">
     <div class="topleft">
-    <a href="main.jsp" target="_parent"><img src="images/logo22.png" title="系统首页" /></a>
+    <a href="main.jsp" target="_parent"><img src="images/logo22.png" title="System_Main_Page" /></a>
     </div>        
     <ul class="nav">   
     </ul>            
     <div class="topright">    
     <ul>
-    <li><span><img src="images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
-    <li><a href="#">关于</a></li>
-    <li><a href="#" onclick="logout();">退出</a></li>
+    <li><span><img src="images/help.png" title="Help"  class="helpimg"/></span><a href="#">Help</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#" onclick="logout();">Logout</a></li>
     </ul>
      
     <div class="user">
@@ -38,7 +38,7 @@ $(function(){
     
      <script type="text/javascript">
 		function logout(){
-			if(window.confirm("您确定要退出吗？"))
+			if(window.confirm("Are you sure to logout？"))
 			{
 			   top.location.href="${pageContext.request.contextPath}/logout.action";
 			 }else{

@@ -9,7 +9,7 @@
 <script language="JavaScript" src="js/jquery.js"></script>
 <script type="text/javascript">
 $(function(){	
-	//导航切换
+	//Navigation Switch
 	$(".menuson li").click(function(){
 		$(".menuson li.active").removeClass("active")
 		$(this).addClass("active");
@@ -27,28 +27,28 @@ $(function(){
 </script>
 </head>
 <body style="background:#f0f9fd;">
-	<div class="lefttop"><span></span>管理菜单</div>
+	<div class="lefttop"><span></span>Manage Menu</div>
 	<c:choose>
 		<c:when test="${sessionScope.login_user.roleId==1}">
 			<dl class="leftmenu">				
 				<dd>
 					<div class="title">
-						<span><img src="images/leftico04.png" /></span>用户管理
+						<span><img src="images/leftico04.png" /></span>User Manage
 					</div>
 					<ul class="menuson">
 						<li><cite></cite><a href="${pageContext.request.contextPath}/findUserList.action"
-							target="rightFrame">用户列表</a><i></i></li>
+							target="rightFrame">User List</a><i></i></li>
 						<li><cite></cite><a href="${pageContext.request.contextPath}/toAddUser.action"
-							target="rightFrame">添加用户</a><i></i></li>
+							target="rightFrame">Add User</a><i></i></li>
 					</ul>
 				</dd>
 				<dd>
 					<div class="title">
-						<span><img src="images/leftico02.png" /></span>新闻类别管理
+						<span><img src="images/leftico02.png" /></span>News Category Manage
 					</div>
 					<ul class="menuson">
 						<li><cite></cite><a href="${pageContext.request.contextPath}/findCategoryList.action"
-							target="rightFrame">新闻类别列表</a><i></i></li>
+							target="rightFrame">News Category List</a><i></i></li>
 					</ul>
 				</dd>
 			</dl>
@@ -57,13 +57,13 @@ $(function(){
 			<dl class="leftmenu">
 				<dd>
 					<div class="title">
-						<span><img src="images/leftico01.png" /></span>新闻管理
+						<span><img src="images/leftico01.png" /></span>News Manage
 					</div>
 					<ul class="menuson">
 						<li><cite></cite><a href="${pageContext.request.contextPath}/findNewsByPage.action"
-							target="rightFrame">新闻列表</a><i></i></li>
+							target="rightFrame">News List</a><i></i></li>
 						<li><cite></cite><a href="${pageContext.request.contextPath}/toAddNews.action"
-							target="rightFrame">发布新闻</a><i></i></li>
+							target="rightFrame">Publish News</a><i></i></li>
 					</ul>
 				</dd>
 			</dl>

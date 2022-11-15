@@ -11,6 +11,6 @@ public interface RoleDao {
 	// Search All roles in DB
 	public List<Role> selectRoleList();
 
-	// 根据角色ID获取角色及其关联的用户
-	//public Role selectRoleWithUsers(@Param("roleId") Integer roleId);
+	// Search role and it's related user by role id
+	public Role selectRoleWithUsers(@Param("roleId") Integer roleId);
 }

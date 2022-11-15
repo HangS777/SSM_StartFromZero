@@ -8,14 +8,14 @@ request.setCharacterEncoding("UTF-8");
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>登录-新闻发布管理系统</title>
-		<!--BootStrap设计的页面支持响应式的 -->
+		<title>Login-News Publish Management System</title>
+		<!--BootStrap support for pages responsive -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Bootstrap 核心 CSS 文件 -->
+		<!--Bootstrap core CSS files -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css"/>
-		<!--引入JQuery的JS文件：JQuery的JS文件要在BootStrap的js的文件的前面引入-->
+		<!--Intruduce JQuery's JS files：JQuery's JS files should be introduced before BootStrap's JS files-->
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" ></script>
-		<!--引入BootStrap的JS的文件-->
+		<!--Introduce BootStrap's JS files-->
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 		<script>
@@ -58,35 +58,35 @@ request.setCharacterEncoding("UTF-8");
 				<div class="col-xs-6 col-sm-6" class="logoI">
 				</div>				
 			</div>			
-			<!--导航条-->			
+			<!--Navigation bar-->			
 			<div class="login">
 				<div class="header">
 					<div class="switch">
-						<a href="#" class="switch_login" id="switch_login">后台登录</a>
+						<a href="#" class="switch_login" id="switch_login">Backend Login</a>
 						<div class="switch_bottom" id="switch_bottom" style="position: absolute;width:70px;left:0px;">
 						</div>
 					</div>
 				</div>
-				<!--登录-->
+				<!--Login-->
 				<div class="qlogin" id="qlogin">
 					<div class="web_login" align="center">
 						<form action="${pageContext.request.contextPath}/login.action" method="post"  onsubmit="return checkValue()">
-						<font style="color:#ff0000;font-size:16px;">${msg }</font>
+						<font style="color:#ff0000;font-size:16px;">${msg}</font>
 						<div style="height:10px;"></div>
 							<div class="uname" class="input-group">
 								<span class="input-group-addon">
 									<img src="${pageContext.request.contextPath}/images/username.png" />
 								</span>
-								<input type="text" name="loginName" id="loginName" class="form-control" placeholder="请输入登录账号"/>
+								<input type="text" name="loginName" id="loginName" class="form-control" placeholder="LoginName"/>
 							</div>						
 							<div class="upwd" class="input-group">
 								<span class="input-group-addon">
 									<img src="${pageContext.request.contextPath}/images/password.png" />
 								</span>
-								<input type="password" name="password" id="password" class="form-control" placeholder="密码"/>
+								<input type="password" name="password" id="password" class="form-control" placeholder="Password"/>
 							</div>
-							<div style="padding-left: 100px; margin-top: 20px;">
-								<button class="btn btn-primary btn-lg" style="width:150px">登录</button>
+							<div style="padding-left: 20px; margin-top: 20px;">
+								<button class="btn btn-primary btn-lg" style="width:150px">Login</button>
 							</div>
 						</form>
 					</div>
@@ -96,13 +96,13 @@ request.setCharacterEncoding("UTF-8");
 			function checkValue() {
 				var str = document.getElementById("loginName").value;
 				if (str.length < 1) {
-					alert("请输入账号");
+					alert("Plear Input LoginName");
 					document.getElementById("loginName").focus();
 					return false;
 				}
 				str = document.getElementById("password").value;
 				if (str.length < 1) {
-					alert("请输入密码");
+					alert("Plear Input Password");
 					document.getElementById("password").focus();
 					return false;
 				}

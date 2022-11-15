@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-<title>新闻发布管理系统</title>
+<title>News Publish Management System</title>
 </head>
 
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">

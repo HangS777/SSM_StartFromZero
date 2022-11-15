@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.dao.UserDao">
-	<!--查询所有用户集合where语句 -->
+	<!--Search all users -->
+	<select id="selectUserList" parameterType="String" resultType="User">
+        select u.*,r.roleName from t_user as u,t_role as r 
+		<include refid="selectUserListWhere" />
+		order by registerTime desc
+	</select>
+	<!--search all users where conditions -->
 	<sql id="selectUserListWhere">
 	  <where>
 	  	u.roleId=r.roleId
@@ -14,25 +20,19 @@
 	    </if>
 	  </where>
 	</sql>
-	<!--查询所有用户集合列表 -->
-	<select id="selectUserList" parameterType="String" resultType="User">
-        select u.*,r.roleName from t_user as u,t_role as r 
-		<include refid="selectUserListWhere" />
-		order by registerTime desc
-	</select>
-	<!--通过账号和密码查询用户 -->
+	<!--Search user by loginname and password -->
 	<select id="findUser" parameterType="String" resultType="User">
 		select * from t_user where loginName=#{loginName} and password=#{password} limit 0,1
 	</select>
-	<!--通过userId查询用户 -->
+	<!-- Search user by userId -->
 	<select id="getUserByUserId" parameterType="Integer" resultType="User">
 		select * from t_user where userId=#{userId}
 	</select>
-	<!--通过登录账号查询用户 -->
+	<!-- Search user by loginname -->
 	<select id="getUserByLoginName" parameterType="String" resultType="User">
 		select * from t_user where loginName=#{loginName} limit 0,1
 	</select>
-	<!--添加用户 -->
+	<!--Add User -->
 	<insert id="addUser" parameterType="User">
 		insert into t_user(
 			userName,
@@ -53,7 +53,7 @@
 			#{roleId}
 		)
 	</insert>
-	<!-- 更新用户 -->
+	<!-- Update User -->
 	<update id="updateUser" parameterType="User">
 		update t_user
 		<set>
@@ -74,11 +74,11 @@
 		</set>
 		where userId=#{userId}
 	</update> 
-	<!--删除用户 -->
+	<!--Delete User By UserId -->
 	<delete id="delUser" parameterType="Integer">
 		delete from t_user where userId=#{userId}
 	</delete>
-	<!--设置用户状态  status 1:未启用；2：已启用；3：被禁用-->
+	<!--Set user status, '1': Not Activated; '2': Activated; '3': Disabled-->
 	<update id="setUserStatus" parameterType="User">
 		update t_user set status=#{status} where userId=#{userId}
 	</update>

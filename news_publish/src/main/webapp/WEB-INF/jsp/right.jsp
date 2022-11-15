@@ -14,14 +14,14 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<div class="place">
-    <span>位置：</span>
+    <span>Location：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
+    <li><a href="#">Main Page</a></li>
     </ul>
     </div>
     <div class="mainindex">
     <div class="welinfo">
-    <b> ${sessionScope.login_user.userName }，你好！欢迎使用新闻发布管理系统</b>
+    <b> ${sessionScope.login_user.userName }，Hi！Welcome using news publish management system</b>
     </div>
     <div class="xline"></div>
     <ul class="iconlist">
@@ -30,24 +30,24 @@ request.setCharacterEncoding("UTF-8");
 				<li><img src="images/ico07.png"
 						style="width: 50px; height: 50px;" />
 					<p>
-							<a href="${pageContext.request.contextPath}/findUserList.action">用户管理</a>
+							<a href="${pageContext.request.contextPath}/findUserList.action">User Manage</a>
 						</p></li>
 					<li><img src="images/ico03.png"
 						style="width: 50px; height: 50px;" />
 					<p>
-							<a href="${pageContext.request.contextPath}/findCategoryList.action">信息类别管理</a>
+							<a href="${pageContext.request.contextPath}/findCategoryList.action">News Category Manage</a>
 						</p></li>
 				</c:when>
 				<c:when test="${sessionScope.login_user.roleId==2}">
 					<li><img src="images/ico06.png"
 						style="width: 50px; height: 50px;" />
 					<p>
-							<a href="${pageContext.request.contextPath}/findNewsByPage.action">查询新闻</a>
+							<a href="${pageContext.request.contextPath}/findNewsByPage.action">Search News</a>
 						</p></li>
 					<li><img src="images/ico02.png"
 						style="width: 50px; height: 50px;" />
 					<p>
-							<a href="${pageContext.request.contextPath}/toAddNews.action">发布新闻</a>
+							<a href="${pageContext.request.contextPath}/toAddNews.action">Publish News</a>
 						</p></li>
 				</c:when>
 			</c:choose>
